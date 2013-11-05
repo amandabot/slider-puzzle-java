@@ -30,12 +30,7 @@ public class SliderPuzzle {
 
     //Constructor for SliderPuzzle
     private SliderPuzzle() {
-        frame = new JFrame("Slider Puzzle");
-        frame.getContentPane().add(createNewGame());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null); //Centers frame. Must follow pack
-        frame.setVisible(true);
+        createAndShowFrame();
     }
 
     private JPanel createNewGame() {
@@ -61,6 +56,15 @@ public class SliderPuzzle {
         return panel;
     }
 
+    private void createAndShowFrame() {
+        frame = new JFrame("Slider Puzzle");
+        frame.add(createNewGame());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(null); //Centers frame. Must follow pack
+        frame.setVisible(true);
+    }
+
     private class ButtonEventHandler implements ActionListener {
 
         @Override
@@ -81,33 +85,33 @@ public class SliderPuzzle {
                 }
             }
         }
+    }
 
-        /*  Returns original square or the neighboring square (top, bottom, left or right) that is blank. */
-        private JButton checkNeighbors(int rowIndex, int colIndex) {
-            JButton temp;
-            String lastSquare = Integer.toString(TOTAL_SQUARES);
-            //Top neighbor
-            temp = squares[Math.max(0, rowIndex - 1)][colIndex];
-            if (temp.getText().equals(lastSquare)) {
-                return temp;
-            }
-            //Bottom neighbor
-            temp = squares[Math.min(NUM_ROWS - 1, rowIndex + 1)][colIndex];
-            if (temp.getText().equals(lastSquare)) {
-                return temp;
-            }
-            //Left neighbor
-            temp = squares[rowIndex][Math.max(0, colIndex - 1)];
-            if (temp.getText().equals(lastSquare)) {
-                return temp;
-            }
-            //Right neighbor
-            temp = squares[rowIndex][Math.min(NUM_COLUMNS - 1, colIndex + 1)];
-            if (temp.getText().equals(lastSquare)) {
-                return temp;
-            }
-            return squares[rowIndex][colIndex];
+    /*  Returns original square or the neighboring square (top, bottom, left or right) that is blank. */
+    private JButton checkNeighbors(int rowIndex, int colIndex) {
+        JButton temp;
+        String lastSquare = Integer.toString(TOTAL_SQUARES);
+        //Top neighbor
+        temp = squares[Math.max(0, rowIndex - 1)][colIndex];
+        if (temp.getText().equals(lastSquare)) {
+            return temp;
         }
+        //Bottom neighbor
+        temp = squares[Math.min(NUM_ROWS - 1, rowIndex + 1)][colIndex];
+        if (temp.getText().equals(lastSquare)) {
+            return temp;
+        }
+        //Left neighbor
+        temp = squares[rowIndex][Math.max(0, colIndex - 1)];
+        if (temp.getText().equals(lastSquare)) {
+            return temp;
+        }
+        //Right neighbor
+        temp = squares[rowIndex][Math.min(NUM_COLUMNS - 1, colIndex + 1)];
+        if (temp.getText().equals(lastSquare)) {
+            return temp;
+        }
+        return squares[rowIndex][colIndex];
     }
 
     private void checkForWin() {
