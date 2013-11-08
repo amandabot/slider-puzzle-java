@@ -176,7 +176,8 @@ public class SliderPuzzle {
         int counter = 0;
         for (JButton[] jButtons : squares) {
             for (JButton jButton : jButtons) {
-                jButton.setText(availableNumbers.get(counter++).toString());
+                jButton.setText(availableNumbers.get(counter).toString());
+                counter += 1;
             }
         }
     }
